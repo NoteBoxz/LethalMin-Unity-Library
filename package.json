@@ -1,0 +1,14 @@
+{
+    "name": "com.noteboxz.lethalmin-unity-library",
+    "version": "1.0.0",
+    "displayName": "LethalMin Library",
+    "description": "",
+    "unity": "2022.3",
+    "licensesUrl": "https://github.com/NoteBoxz/LethalMin-Unity-Library/blob/main/LICENSE",
+    "dependencies": {
+      "com.unity.netcode.gameobjects": "2.1.1"
+   },
+    "author": {
+      "name": "NoteBoxz"
+    }
+  }
