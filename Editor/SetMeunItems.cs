@@ -6,7 +6,7 @@ public class SetMenuItems
     [MenuItem("Assets/Create/LethalMin Library/Pikmin Type Example")]
     static void ImportExamplePackage()
     {
-        string packagePath = "Packages/LethalMin-Unity-Library/Example.unitypackage";
+        string packagePath = "Packages/com.noteboxz.lethalmin-unity-library/Example.unitypackage";
         
         if (System.IO.File.Exists(packagePath))
         {
