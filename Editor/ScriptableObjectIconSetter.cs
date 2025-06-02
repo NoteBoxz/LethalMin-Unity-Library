@@ -10,11 +10,12 @@ public class ScriptableObjectIconSetter
 {
     private static readonly Dictionary<string, string> TypeToIconMap = new Dictionary<string, string>
     {
-        { "LethalMinLibrary.PikminType", "LethalMinLibrary.No_Pikmin_P2S_icon.png" },
-        { "LethalMinLibrary.OnionType", "LethalMinLibrary.OnionTIcon.png" },
-        { "LethalMinLibrary.OnionFuseRules", "LethalMinLibrary.OnionFLIcon.png" },
-        { "LethalMinLibrary.PikminSoundPack", "LethalMinLibrary.PikminSPicon.png" },
-        { "LethalMinLibrary.AnimationPack", "PikminAPicon.png" }
+        { "LethalMinLibrary.LibPikminType", "LethalMinLibrary.No_Pikmin_P2S_icon.png" },
+        { "LethalMinLibrary.LibOnionType", "LethalMinLibrary.OnionTIcon.png" },
+        { "LethalMinLibrary.LibOnionFuseRules", "LethalMinLibrary.OnionFLIcon.png" },
+        { "LethalMinLibrary.LibPikminSoundPack", "LethalMinLibrary.PikminSPicon.png" },
+        { "LethalMinLibrary.LibPikminAnimationPack", "LethalMinLibrary.PikminAPicon.png" },
+        { "LethalMinLibrary.LMLmodInfo", "LethalMinLibrary.Infoicon.png" }
         // Add more mappings here as needed, e.g.:
         // { "LethalMinLibrary.OnionType", "LethalMinLibrary.Onion_Icon.png" },
     };
@@ -43,7 +44,6 @@ public class ScriptableObjectIconSetter
             string[] guids = AssetDatabase.FindAssets($"t:{typeName}");
             foreach (string guid in guids)
             {
-                Debug.Log($"Processing GUID: {guid} for type: {typeName}");
                 string assetPath = AssetDatabase.GUIDToAssetPath(guid);
                 Object obj = AssetDatabase.LoadAssetAtPath<Object>(assetPath);
                 if (obj != null && obj.GetType().FullName == typeName)
