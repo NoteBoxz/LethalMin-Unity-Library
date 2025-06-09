@@ -15,7 +15,8 @@ public class ScriptableObjectIconSetter
         { "LethalMinLibrary.LibOnionFuseRules", "LethalMinLibrary.OnionFLIcon.png" },
         { "LethalMinLibrary.LibPikminSoundPack", "LethalMinLibrary.PikminSPicon.png" },
         { "LethalMinLibrary.LibPikminAnimationPack", "LethalMinLibrary.PikminAPicon.png" },
-        { "LethalMinLibrary.LMLmodInfo", "LethalMinLibrary.Infoicon.png" }
+        { "LethalMinLibrary.LMLmodInfo", "LethalMinLibrary.Infoicon.png" },
+        { "LethalMinBundleContainer", "LethalMinLibrary.LethalMinFileIcon.png" }
         // Add more mappings here as needed, e.g.:
         // { "LethalMinLibrary.OnionType", "LethalMinLibrary.Onion_Icon.png" },
     };

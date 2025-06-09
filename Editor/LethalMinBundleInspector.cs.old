@@ -1,0 +1,139 @@
+using UnityEngine;
+using UnityEditor;
+using System.IO;
+using LethalMinLibrary;
+
+[CustomEditor(typeof(LethalMinBundleContainer))]
+public class LethalMinBundleInspector : Editor
+{
+    private Vector2 scrollPosition;
+    private bool showAssets = true;
+    
+    public override void OnInspectorGUI()
+    {
+        var container = (LethalMinBundleContainer)target;
+        
+        // Header section with mod info
+        EditorGUILayout.BeginVertical(EditorStyles.helpBox);
+        EditorGUILayout.LabelField("LethalMin Bundle", EditorStyles.boldLabel);
+        
+        if (!string.IsNullOrEmpty(container.modName))
+        {
+            EditorGUILayout.LabelField("Mod Name:", container.modName);
+            EditorGUILayout.LabelField("Author:", container.modAuthor);
+            EditorGUILayout.LabelField("Version:", container.modVersion);
+        }
+        else
+        {
+            EditorGUILayout.LabelField("Bundle Name:", container.bundleName);
+        }
+        EditorGUILayout.EndVertical();
+        
+        EditorGUILayout.Space();
+        
+        // Main mod info reference
+        if (container.modInfo != null)
+        {
+            EditorGUILayout.ObjectField("Mod Info", container.modInfo, typeof(LMLmodInfo), false);
+            
+            if (GUILayout.Button("Use as Dependency"))
+            {
+                // Code to add this mod as a dependency to the active selection
+                AddAsDependency(container.modInfo);
+            }
+        }
+        
+        EditorGUILayout.Space();
+        
+        // List of assets with expandable sections
+        showAssets = EditorGUILayout.Foldout(showAssets, "Bundle Assets", true);
+        if (showAssets && container.assetReferences.Count > 0)
+        {
+            scrollPosition = EditorGUILayout.BeginScrollView(scrollPosition, GUILayout.Height(300));
+            
+            foreach (var assetRef in container.assetReferences)
+            {
+                if (assetRef.asset != null)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.ObjectField(assetRef.name, assetRef.asset, assetRef.asset.GetType(), false);
+                    
+                    if (GUILayout.Button("Extract", GUILayout.Width(70)))
+                    {
+                        ExtractAsset(assetRef.asset, assetRef.name);
+                    }
+                    EditorGUILayout.EndHorizontal();
+                }
+            }
+            
+            EditorGUILayout.EndScrollView();
+        }
+    }
+    
+    private void AddAsDependency(LMLmodInfo modInfo)
+    {
+        // Get the currently selected mod info asset
+        var selection = Selection.activeObject as LMLmodInfo;
+        if (selection == null)
+        {
+            EditorUtility.DisplayDialog("No Target Selected", 
+                "Please select a LMLmodInfo asset in your project to add this as a dependency.", "OK");
+            return;
+        }
+        
+        // Check if it's already in the dependencies
+        bool alreadyExists = false;
+        foreach (LMLmodInfo existingDep in selection.Dependencies)
+        {
+            if (existingDep != null && existingDep.GUID == modInfo.GUID)
+            {
+                alreadyExists = true;
+                break;
+            }
+        }
+        
+        if (!alreadyExists)
+        {
+            // Create a local copy of the modInfo
+            string assetPath = $"Assets/ModDependencies/{modInfo.GUID}.asset";
+            Directory.CreateDirectory(Path.GetDirectoryName(assetPath));
+            
+            LMLmodInfo localCopy = Instantiate(modInfo);
+            AssetDatabase.CreateAsset(localCopy, assetPath);
+            
+            // Add to dependencies
+            selection.Dependencies.Add(localCopy);
+            EditorUtility.SetDirty(selection);
+            AssetDatabase.SaveAssets();
+            
+            EditorUtility.DisplayDialog("Dependency Added", 
+                $"Added {modInfo.ModName} as a dependency to {selection.ModName}.", "OK");
+        }
+        else
+        {
+            EditorUtility.DisplayDialog("Already Added", 
+                "This dependency is already in the list.", "OK");
+        }
+    }
+    
+    private void ExtractAsset(Object asset, string assetName)
+    {
+        string path = EditorUtility.SaveFilePanelInProject(
+            "Extract Asset", 
+            assetName, 
+            "", 
+            "Choose where to save the extracted asset"
+        );
+        
+        if (!string.IsNullOrEmpty(path))
+        {
+            // Create a copy of the asset
+            Object copy = Instantiate(asset);
+            AssetDatabase.CreateAsset(copy, path);
+            AssetDatabase.SaveAssets();
+            
+            EditorUtility.DisplayDialog("Asset Extracted", 
+                $"Asset '{assetName}' has been extracted to '{path}'", "OK");
+        }
+    }
+}
