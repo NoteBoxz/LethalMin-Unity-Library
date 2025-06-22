@@ -3,24 +3,28 @@ guid: 188d4977b88a01449aad0ab387c89bd5
 PluginImporter:
   externalObjects: {}
   serializedVersion: 2
-  iconMap: {}
+  iconMap:
+    LethalMinLibrary.LMLmodInfo: {fileID: 2800000, guid: 98f879180cec765449e161dcedfb54d6,
+      type: 3}
+    LethalMinLibrary.LethalMinBundleContainer: {fileID: 2800000, guid: 3e8c4bdfe2096454a8a15c09ed17f895,
+      type: 3}
+    LethalMinLibrary.LibOnionFuseRules: {fileID: 2800000, guid: 01c701015a9e31942aff587684113d9b,
+      type: 3}
+    LethalMinLibrary.LibOnionType: {fileID: 2800000, guid: e3e3671d30a524d439788acc6166c932,
+      type: 3}
+    LethalMinLibrary.LibPikminAnimationPack: {fileID: 2800000, guid: 33ff6e7333c238d42ab3a9249b2072e4,
+      type: 3}
+    LethalMinLibrary.LibPikminSoundPack: {fileID: 2800000, guid: 3bb4cb5a461fad34596d1b407062cb18,
+      type: 3}
+    LethalMinLibrary.LibPikminType: {fileID: 2800000, guid: 9c0b6c74348d6514dac3804ad9e328bb,
+      type: 3}
   executionOrder: {}
   defineConstraints: []
   isPreloaded: 0
   isOverridable: 0
   isExplicitlyReferenced: 0
-  validateReferences: 0
+  validateReferences: 1
   platformData:
-  - first:
-      : Any
-    second:
-      enabled: 0
-      settings:
-        Exclude Editor: 0
-        Exclude Linux64: 0
-        Exclude OSXUniversal: 0
-        Exclude Win: 0
-        Exclude Win64: 0
   - first:
       Any: 
     second:
@@ -29,35 +33,9 @@ PluginImporter:
   - first:
       Editor: Editor
     second:
-      enabled: 1
+      enabled: 0
       settings:
-        CPU: AnyCPU
         DefaultValueInitialized: true
-        OS: AnyOS
-  - first:
-      Standalone: Linux64
-    second:
-      enabled: 1
-      settings:
-        CPU: AnyCPU
-  - first:
-      Standalone: OSXUniversal
-    second:
-      enabled: 1
-      settings:
-        CPU: AnyCPU
-  - first:
-      Standalone: Win
-    second:
-      enabled: 1
-      settings:
-        CPU: AnyCPU
-  - first:
-      Standalone: Win64
-    second:
-      enabled: 1
-      settings:
-        CPU: AnyCPU
   - first:
       Windows Store Apps: WindowsStoreApps
     second:
