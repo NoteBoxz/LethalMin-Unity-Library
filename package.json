@@ -6,7 +6,8 @@
     "unity": "2022.3",
     "licensesUrl": "https://github.com/NoteBoxz/LethalMin-Unity-Library/blob/main/LICENSE",
     "dependencies": {
-      "com.unity.netcode.gameobjects": "1.5.2"
+      "com.unity.netcode.gameobjects": "1.5.2",
+      "com.unity.assetbundlebrowser": "1.7.0"
    },
     "author": {
       "name": "NoteBoxz"
